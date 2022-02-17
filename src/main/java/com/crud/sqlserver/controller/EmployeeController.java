@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crud.sqlserver.dao.EmployeeDao;
 import com.crud.sqlserver.exception.ResourceNotFoundException;
 import com.crud.sqlserver.model.Employee;
 import com.crud.sqlserver.repository.EmployeeRepository;
@@ -29,6 +30,15 @@ import com.crud.sqlserver.repository.EmployeeRepository;
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
+    
+    @Autowired
+    private EmployeeDao dao;
+    
+    @GetMapping("/employeesName")
+    public List<Employee> getFullName(){
+		return dao.getFullName();
+    	
+    }
 
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
@@ -72,4 +82,6 @@ public class EmployeeController {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
+
+
 }
